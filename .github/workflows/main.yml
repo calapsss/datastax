@@ -81,5 +81,3 @@ Default is `false`.
     fail_on_error: # optional, default is false
     # Additional reviewdog flags
     reviewdog_flags: # optional, default is 
-
-
