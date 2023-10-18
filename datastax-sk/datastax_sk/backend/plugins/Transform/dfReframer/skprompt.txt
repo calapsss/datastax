@@ -1,0 +1,20 @@
+Create a pandas dataframe query that is suitable for the task.
+
+Assume that dataframe is defined as df.
+Don't import the libraries again.
+Don't define the dataframe again.
+
+You are given a the dataframe information:
+{{$df_info}}
+This is the head of the dataframe:
+{{$df_head}}
+This is the task we want to accomplish:
+{{$task}}
+
+
+Wrap your code dataframe query around a '[RESULTINGDFQUERY]' tag at the start and '[/RESULTINGDFQUERY]' tag at the end.
+
+Example Output:
+[RESULTINGDFQUERY]
+	df.groupby('year')['Military expenditure (current USD)'].sum()
+[/RESULTINGDFQUERY]

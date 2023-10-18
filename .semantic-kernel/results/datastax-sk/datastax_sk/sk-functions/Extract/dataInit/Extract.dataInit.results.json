@@ -1,0 +1,107 @@
+{
+    "version": "1.0",
+    "skillName": "Extract",
+    "functionName": "dataInit",
+    "description": "The function is a backend service that cleans the data, segment the dataframe into multiple possible dataframes, and save the dataframes into memory. This will return a list of dataframes and their id.",
+    "filePath": "datastax-sk/datastax_sk/sk-functions/Extract/dataInit/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "Given the country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income, generate a list of possible questions that can be asked about the data and a corresponding pandas query assuming that the dataframe is defined as 'df'. Each question should be relevant and insightful, providing a clear understanding of the information present in the dataframe.\n- THE QUESTIONS SHOULD NOT BE SPECIFIC BUT SHOULD BE GENERAL ENOUGH TO BE APPLICABLE TO ANY DATAFRAME\n- OUTPUT IN JSON DICTIONARY {question:query}\n[STARTJSON]\nYour Output...\n[ENDJSON]\n",
+                "durationInMilliseconds": 13306.4405,
+                "inputTokens": 197,
+                "outputTokens": 266,
+                "result": "{\n  \"What is the total military expenditure for a specific year?\": \"df[df['year']==<year>]['Military expenditure (current USD)'].sum()\",\n  \"What is the average military expenditure as a percentage of GDP?\": \"df['Military expenditure (% of GDP)'].mean()\",\n  \"What is the highest military expenditure in a specific region?\": \"df[df['adminregion']==<region>]['Military expenditure (current USD)'].max()\",\n  \"What is the percentage of general government expenditure spent on military?\": \"df['Military expenditure (% of general government expenditure)'].mean()\",\n  \"What is the income level of a specific country?\": \"df[df['iso3c']==<iso3c>]['incomeLevel'].iloc[0]\",\n  \"What is the trend of military expenditure over the years?\": \"df.groupby('year')['Military expenditure (current USD)'].sum()\",\n  \"What is the distribution of military expenditure across income levels?\": \"df.groupby('incomeLevel')['Military expenditure (current USD)'].sum()\",\n  \"What is the percentage of GDP spent on military for a specific country?\": \"df[df['iso3c']==<iso3c>]['Military expenditure (% of GDP)'].iloc[0]\"\n}",
+                "chatCompletionResult": "{\n  \"What is the total military expenditure for a specific year?\": \"df[df['year']==<year>]['Military expenditure (current USD)'].sum()\",\n  \"What is the average military expenditure as a percentage of GDP?\": \"df['Military expenditure (% of GDP)'].mean()\",\n  \"What is the highest military expenditure in a specific region?\": \"df[df['adminregion']==<region>]['Military expenditure (current USD)'].max()\",\n  \"What is the percentage of general government expenditure spent on military?\": \"df['Military expenditure (% of general government expenditure)'].mean()\",\n  \"What is the income level of a specific country?\": \"df[df['iso3c']==<iso3c>]['incomeLevel'].iloc[0]\",\n  \"What is the trend of military expenditure over the years?\": \"df.groupby('year')['Military expenditure (current USD)'].sum()\",\n  \"What is the distribution of military expenditure across income levels?\": \"df.groupby('incomeLevel')['Military expenditure (current USD)'].sum()\",\n  \"What is the percentage of GDP spent on military for a specific country?\": \"df[df['iso3c']==<iso3c>]['Military expenditure (% of GDP)'].iloc[0]\"\n}"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-4",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-4",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "Given the country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income, generate a list of possible questions that can be asked about the data and a corresponding pandas query assuming that the dataframe is defined as 'df'. Each question should be relevant and insightful, providing a clear understanding of the information present in the dataframe.\nOUTPUT IN JSON DICTIONARY {question:query}\n[STARTJSON]\nYour Output...\n[ENDJSON]\n",
+                "durationInMilliseconds": 28402.6024,
+                "inputTokens": 171,
+                "outputTokens": 516,
+                "result": "[STARTJSON]\n{\n\"1. What is the military expenditure of Afghanistan in 1970 in USD?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['Military expenditure (current USD)']\",\n\"2. What is the military expenditure of Afghanistan as a percentage of GDP in 1970?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['Military expenditure (% of GDP)']\",\n\"3. What is the income level of Afghanistan in 1970?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['incomeLevel']\",\n\"4. In which admin region is Afghanistan located?\": \"df[df['country'] == 'Afghanistan']['adminregion'].unique()\",\n\"5. What is the iso3c and iso2c code for Afghanistan?\": \"df[df['country'] == 'Afghanistan'][['iso3c', 'iso2c']].head(1)\",\n\"6. For which years do we have data for military expenditure in Afghanistan?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['year']\",\n\"7. For which years do we not have data for military expenditure in Afghanistan?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].isna())]['year']\",\n\"8. What is the average military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].mean()\",\n\"9. What is the maximum military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].max()\",\n\"10. What is the minimum military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].min()\"\n}\n[ENDJSON]",
+                "chatCompletionResult": "[STARTJSON]\n{\n\"1. What is the military expenditure of Afghanistan in 1970 in USD?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['Military expenditure (current USD)']\",\n\"2. What is the military expenditure of Afghanistan as a percentage of GDP in 1970?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['Military expenditure (% of GDP)']\",\n\"3. What is the income level of Afghanistan in 1970?\": \"df[(df['country'] == 'Afghanistan') & (df['year'] == 1970)]['incomeLevel']\",\n\"4. In which admin region is Afghanistan located?\": \"df[df['country'] == 'Afghanistan']['adminregion'].unique()\",\n\"5. What is the iso3c and iso2c code for Afghanistan?\": \"df[df['country'] == 'Afghanistan'][['iso3c', 'iso2c']].head(1)\",\n\"6. For which years do we have data for military expenditure in Afghanistan?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['year']\",\n\"7. For which years do we not have data for military expenditure in Afghanistan?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].isna())]['year']\",\n\"8. What is the average military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].mean()\",\n\"9. What is the maximum military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].max()\",\n\"10. What is the minimum military expenditure (in current USD) of Afghanistan for the years we have data?\": \"df[(df['country'] == 'Afghanistan') & (df['Military expenditure (current USD)'].notna())]['Military expenditure (current USD)'].min()\"\n}\n[ENDJSON]"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-4-0314",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-4-0314",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "text-completion"
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "Given the country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income, generate a list of possible questions that can be asked about the data and a corresponding pandas query assuming that the dataframe is defined as 'df'. Each question should be relevant and insightful, providing a clear understanding of the information present in the dataframe.\nOUTPUT IN JSON DICTIONARY {question:query}\n[STARTJSON]\nYour Output...\n[ENDJSON]\n",
+                "durationInMilliseconds": 1030.4312,
+                "inputTokens": 171,
+                "outputTokens": 98,
+                "result": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income",
+                "textCompletionResult": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+            }
+        }
+    ]
+}

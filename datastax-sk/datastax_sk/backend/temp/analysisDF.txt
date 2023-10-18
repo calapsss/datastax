@@ -1,0 +1,13 @@
+Based on the given dataframe, the necessary columns for analysis are:
+
+1. country: This column provides information about the country for which the data is recorded.
+2. iso3c: This column contains the ISO 3-letter country code for each country.
+3. iso2c: This column contains the ISO 2-letter country code for each country.
+4. year: This column represents the year for which the data is recorded.
+5. Military expenditure (current USD): This column provides information about the military expenditure in current US dollars for each country and year.
+6. Military expenditure (% of general government expenditure): This column represents the percentage of military expenditure in relation to the general government expenditure for each country and year.
+7. Military expenditure (% of GDP): This column represents the percentage of military expenditure in relation to the Gross Domestic Product (GDP) for each country and year.
+8. adminregion: This column provides information about the administrative region to which each country belongs.
+9. incomeLevel: This column represents the income level of each country.
+
+These columns can be used for further analysis to study the military expenditure trends, compare the military expenditure of different countries, analyze the relationship between military expenditure and other factors such as GDP or government expenditure, and understand the distribution of military expenditure across different income levels and administrative regions.

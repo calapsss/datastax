@@ -1,0 +1,22 @@
+{
+    "schema": 1,
+    "type": "completion",
+    "description": "The function will have the arguments of the dataframe information, dataframe head, and the task. It will return a dataframe query (assuming defined as df) will be transformed to fit the given task at hand.",
+    "completion": {
+        "max_tokens": 1000,
+        "temperature": 0,
+        "top_p": 0,
+        "presence_penalty": 0,
+        "frequency_penalty": 0
+    },
+    "input": {
+        "parameters": [
+            {
+                "name": "input",
+                "description": "Input for this semantic function.",
+                "defaultValue": ""
+            }
+        ]
+    },
+    "default_backends": []
+}

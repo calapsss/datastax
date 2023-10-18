@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "datastax-sk"
+version = "0.1.0"
+description = "LLM Application for Databases using Microsoft Semantic Kernel"
+authors = ["Charles Calapini <7816568+calapsss@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+semantic-kernel = "^0.3.13.dev0"
+promptflow = "^0.1.0b7.post1"
+promptflow-tools = "^0.1.0b9"
+streamlit = "^1.27.2"
+fastapi = "^0.103.2"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

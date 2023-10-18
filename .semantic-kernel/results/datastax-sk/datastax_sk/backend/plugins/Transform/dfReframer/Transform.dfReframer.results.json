@@ -1,0 +1,50 @@
+{
+    "version": "1.0",
+    "skillName": "Transform",
+    "functionName": "dfReframer",
+    "description": "The function will have the arguments of the dataframe information, dataframe head, and the task. It will return a dataframe query (assuming defined as df) will be transformed to fit the given task at hand.",
+    "filePath": "datastax-sk/datastax_sk/backend/plugins/Transform/dfReframer/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 1000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "df_info",
+                    "value": "Based on the given dataframe, the necessary columns for analysis are:  1. country: This column provides information about the country for which the data is recorded. 2. iso3c: This column contains the ISO 3-letter country code for each country. 3. iso2c: This column contains the ISO 2-letter country code for each country. 4. year: This column represents the year for which the data is recorded. 5. Military expenditure (current USD): This column provides information about the military expenditure in current US dollars for each country and year. 6. Military expenditure (% of general government expenditure): This column represents the percentage of military expenditure in relation to the general government expenditure for each country and year. 7. Military expenditure (% of GDP): This column represents the percentage of military expenditure in relation to the Gross Domestic Product (GDP) for each country and year. 8. adminregion: This column provides information about the administrative region to which each country belongs. 9. incomeLevel: This column represents the income level of each country.  These columns can be used for further analysis to study the military expenditure trends, compare the military expenditure of different countries, analyze the relationship between military expenditure and other factors such as GDP or government expenditure, and understand the distribution of military expenditure across different income levels and administrative regions."
+                },
+                {
+                    "key": "df_head",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income"
+                },
+                {
+                    "key": "task",
+                    "value": "I want to know which country has the highest expenditure"
+                }
+            ],
+            "output": {
+                "prompt": "Create a pandas dataframe query that is suitable for the task.\n\nAssume that dataframe is defined as df.\nDon't import the libraries again.\nDon't define the dataframe again.\n\nYou are given a the dataframe information:\nBased on the given dataframe, the necessary columns for analysis are:  1. country: This column provides information about the country for which the data is recorded. 2. iso3c: This column contains the ISO 3-letter country code for each country. 3. iso2c: This column contains the ISO 2-letter country code for each country. 4. year: This column represents the year for which the data is recorded. 5. Military expenditure (current USD): This column provides information about the military expenditure in current US dollars for each country and year. 6. Military expenditure (% of general government expenditure): This column represents the percentage of military expenditure in relation to the general government expenditure for each country and year. 7. Military expenditure (% of GDP): This column represents the percentage of military expenditure in relation to the Gross Domestic Product (GDP) for each country and year. 8. adminregion: This column provides information about the administrative region to which each country belongs. 9. incomeLevel: This column represents the income level of each country.  These columns can be used for further analysis to study the military expenditure trends, compare the military expenditure of different countries, analyze the relationship between military expenditure and other factors such as GDP or government expenditure, and understand the distribution of military expenditure across different income levels and administrative regions.\nThis is the head of the dataframe:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income\nThis is the task we want to accomplish:\nI want to know which country has the highest expenditure\n\n\nWrap your code dataframe query around a '[RESULTINGDFQUERY]' tag at the start and '[/RESULTINGDFQUERY]' tag at the end.\n\nExample Output:\n[RESULTINGDFQUERY]\n\tdf.groupby('year')['Military expenditure (current USD)'].sum()\n[/RESULTINGDFQUERY]",
+                "durationInMilliseconds": 3058.9932,
+                "inputTokens": 536,
+                "outputTokens": 36,
+                "result": "[RESULTINGDFQUERY]\ndf.groupby('country')['Military expenditure (current USD)'].sum().sort_values(ascending=False).head(1)\n[/RESULTINGDFQUERY]",
+                "chatCompletionResult": "[RESULTINGDFQUERY]\ndf.groupby('country')['Military expenditure (current USD)'].sum().sort_values(ascending=False).head(1)\n[/RESULTINGDFQUERY]"
+            }
+        }
+    ]
+}

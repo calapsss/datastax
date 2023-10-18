@@ -1,0 +1,378 @@
+{
+    "version": "1.0",
+    "skillName": "Transform",
+    "functionName": "simpleCodeGen",
+    "description": "The function will receive the arguments: Task to accomplish, Current Dataframe Query Code, Dataframe Informaition and will return a full code that will generate visualizations on streamlit",
+    "filePath": "datastax-sk/datastax_sk/backend/plugins/Transform/simpleCodeGen/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 3000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "\"I want to know which country has the highest military expenditure\""
+                },
+                {
+                    "key": "dataframe",
+                    "value": "'''Based on the given dataframe, the necessary columns for analysis are: 1. country: This column provides information about the country for which the data is recorded. 2. iso3c: This column contains the ISO 3-letter country code for each country. 3. iso2c: This column contains the ISO 2-letter country code for each country. 4. year: This column represents the year for which the data is recorded. 5. Military expenditure (current USD): This column provides information about the military expenditure in current US dollars for each country and year. 6. Military expenditure (% of general government expenditure): This column represents the percentage of military expenditure in relation to the general government expenditure for each country and year. 7. Military expenditure (% of GDP): This column represents the percentage of military expenditure in relation to the Gross Domestic Product (GDP) for each country and year. 8. adminregion: This column provides information about the administrative region to which each country belongs. 9. incomeLevel: This column represents the income level of each country. These columns can be used for further analysis to study the military expenditure trends, compare the military expenditure of different countries, analyze the relationship between military expenditure and other factors such as GDP or government expenditure, and understand the distribution of military expenditure across different income levels and administrative regions.'''"
+                },
+                {
+                    "key": "code",
+                    "value": "\"df.groupby('year')['Military expenditure (current USD)'].sum()\""
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A JSON OBJECT THAT HAS CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK AND AN EXPLANATION FOR THE CODE. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\n\"I want to know which country has the highest military expenditure\"\n+++++\nDATAFRAME INFO:\n'''Based on the given dataframe, the necessary columns for analysis are: 1. country: This column provides information about the country for which the data is recorded. 2. iso3c: This column contains the ISO 3-letter country code for each country. 3. iso2c: This column contains the ISO 2-letter country code for each country. 4. year: This column represents the year for which the data is recorded. 5. Military expenditure (current USD): This column provides information about the military expenditure in current US dollars for each country and year. 6. Military expenditure (% of general government expenditure): This column represents the percentage of military expenditure in relation to the general government expenditure for each country and year. 7. Military expenditure (% of GDP): This column represents the percentage of military expenditure in relation to the Gross Domestic Product (GDP) for each country and year. 8. adminregion: This column provides information about the administrative region to which each country belongs. 9. incomeLevel: This column represents the income level of each country. These columns can be used for further analysis to study the military expenditure trends, compare the military expenditure of different countries, analyze the relationship between military expenditure and other factors such as GDP or government expenditure, and understand the distribution of military expenditure across different income levels and administrative regions.'''\n+++++\nCURRENT DATAFRAME CODE:\n\"df.groupby('year')['Military expenditure (current USD)'].sum()\"\n+++++\nFormat your output in json object\n+++++\nExample Output:\n{\n    {'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    '''},\n    {'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''},\n}\n+++++\n",
+                "durationInMilliseconds": 7121.4417,
+                "inputTokens": 659,
+                "outputTokens": 160,
+                "result": "{\n    \"code\": '''\n        st.write('Grouping the dataframe by country and finding the maximum military expenditure')\n        max_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n        st.write('Finding the country with the highest military expenditure')\n        max_country = max_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The country with the highest military expenditure is:\", max_country)\n    ''',\n    \"explanation\": '''\n        The code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}",
+                "chatCompletionResult": "{\n    \"code\": '''\n        st.write('Grouping the dataframe by country and finding the maximum military expenditure')\n        max_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n        st.write('Finding the country with the highest military expenditure')\n        max_country = max_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The country with the highest military expenditure is:\", max_country)\n    ''',\n    \"explanation\": '''\n        The code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 3000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A JSON OBJECT THAT HAS CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK AND AN EXPLANATION FOR THE CODE. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\nFormat your output in json object\n+++++\nExample Output:\n{\n    {'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    '''},\n    {'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''},\n}\n+++++\n",
+                "durationInMilliseconds": 7119.2651,
+                "inputTokens": 482,
+                "outputTokens": 168,
+                "result": "{\n    \"code\": '''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    ''',\n    \"explanation\": '''\n        The code first groups the dataframe by year and sums the military expenditure for each year using the groupby() and sum() functions. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}",
+                "chatCompletionResult": "{\n    \"code\": '''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    ''',\n    \"explanation\": '''\n        The code first groups the dataframe by year and sums the military expenditure for each year using the groupby() and sum() functions. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 3000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\nFormat your output in json object\n+++++\nExample Output:\n{\n    {'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    '''},\n    {'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''},\n}\n+++++\n",
+                "durationInMilliseconds": 8549.2707,
+                "inputTokens": 470,
+                "outputTokens": 191,
+                "result": "Here's the code to achieve the task:\n\n```\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n```\n\nExplanation:\nThe code first groups the dataframe by year and sums the military expenditure for each year using the `groupby()` and `sum()` functions. It then finds the year with the highest military expenditure using the `idxmax()` function. The result is displayed on Streamlit using the `write()` function. The output is formatted as a JSON object with a `code` key containing the code and an `explanation` key explaining the code.",
+                "chatCompletionResult": "Here's the code to achieve the task:\n\n```\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n```\n\nExplanation:\nThe code first groups the dataframe by year and sums the military expenditure for each year using the `groupby()` and `sum()` functions. It then finds the year with the highest military expenditure using the `idxmax()` function. The result is displayed on Streamlit using the `write()` function. The output is formatted as a JSON object with a `code` key containing the code and an `explanation` key explaining the code."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 3000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\nFormat your output in json object\n+++++\nExample Output:\n{\n    {'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    '''},\n    {'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''},\n}\n+++++\n",
+                "durationInMilliseconds": 15840.4922,
+                "inputTokens": 490,
+                "outputTokens": 401,
+                "result": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Grouping the dataframe by year and summing the military expenditure\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Formatting the output in json object\noutput = {\n    'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    ''',\n    'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}\n\n# Displaying the output on Streamlit\nst.write('Output:', output)\n[ENDCODE]\n\nExplanation:\nThe code groups the dataframe by year and sums the military expenditure for each year using the groupby() and sum() functions. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. The output is formatted as a json object and displayed on Streamlit using the write() function.",
+                "chatCompletionResult": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Grouping the dataframe by year and summing the military expenditure\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Formatting the output in json object\noutput = {\n    'code':'''\n        st.write('Grouping the dataframe by year and summing the military expenditure')\n        yearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n        st.write('Finding the year with the highest military expenditure')\n        max_year = yearly_military_expenditure.idxmax()\n        st.write('Displaying the result on Streamlit')\n        st.write(\"The year with the highest military expenditure is:\", max_year)\n    ''',\n    'explanation':'''\n        The code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n    '''\n}\n\n# Displaying the output on Streamlit\nst.write('Output:', output)\n[ENDCODE]\n\nExplanation:\nThe code groups the dataframe by year and sums the military expenditure for each year using the groupby() and sum() functions. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. The output is formatted as a json object and displayed on Streamlit using the write() function."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 3000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]\n+++++\nExample Output:\n[STARTCODE]\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n[ENDCODE]\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 7093.083,
+                "inputTokens": 503,
+                "outputTokens": 169,
+                "result": "[STARTCODE]\nst.write('Grouping the dataframe by country and finding the maximum military expenditure')\nmax_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n\nst.write('Finding the country with the highest military expenditure')\nmax_country = max_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The country with the highest military expenditure is:\", max_country)\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. This code helps to determine the country with the highest likelihood of going to war based on their military expenditure.",
+                "chatCompletionResult": "[STARTCODE]\nst.write('Grouping the dataframe by country and finding the maximum military expenditure')\nmax_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n\nst.write('Finding the country with the highest military expenditure')\nmax_country = max_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The country with the highest military expenditure is:\", max_country)\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. This code helps to determine the country with the highest likelihood of going to war based on their military expenditure."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \nINSTEAD OF COMMENTS YOU CAN 'st.write()' on each line.\n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]\n+++++\nExample Output:\n[STARTCODE]\nst.write('Grouping the dataframe by year and summing the military expenditure')\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\nst.write('Finding the year with the highest military expenditure')\nmax_year = yearly_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The year with the highest military expenditure is:\", max_year)\n[ENDCODE]\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 6802.4239,
+                "inputTokens": 503,
+                "outputTokens": 169,
+                "result": "[STARTCODE]\nst.write('Grouping the dataframe by country and finding the maximum military expenditure')\nmax_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n\nst.write('Finding the country with the highest military expenditure')\nmax_country = max_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The country with the highest military expenditure is:\", max_country)\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. This code helps to determine the country with the highest likelihood of going to war based on their military expenditure.",
+                "chatCompletionResult": "[STARTCODE]\nst.write('Grouping the dataframe by country and finding the maximum military expenditure')\nmax_military_expenditure = df.groupby('country')['Military expenditure (current USD)'].max()\n\nst.write('Finding the country with the highest military expenditure')\nmax_country = max_military_expenditure.idxmax()\n\nst.write('Displaying the result on Streamlit')\nst.write(\"The country with the highest military expenditure is:\", max_country)\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by country and finds the maximum military expenditure for each country. It then finds the country with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function. This code helps to determine the country with the highest likelihood of going to war based on their military expenditure."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nAssume that dataframe is defined as df.\nDon't import the libraries again.\nDon't define the dataframe again.\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 9846.2482,
+                "inputTokens": 334,
+                "outputTokens": 238,
+                "result": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Assuming that the dataframe is already defined as df\n\n# Grouping the dataframe by year and summing the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Creating a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n\nA bar chart is also created using the bar_chart() function from Streamlit to visualize the yearly military expenditure. This helps the user to see the trend in military expenditure over the years and identify any spikes or dips in spending.\n\n[ENDEXPLANATION]",
+                "chatCompletionResult": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Assuming that the dataframe is already defined as df\n\n# Grouping the dataframe by year and summing the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Creating a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n\nA bar chart is also created using the bar_chart() function from Streamlit to visualize the yearly military expenditure. This helps the user to see the trend in military expenditure over the years and identify any spikes or dips in spending.\n\n[ENDEXPLANATION]"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nAssume that dataframe is defined as df.\nDon't import the libraries again.\nDon't define the dataframe again.\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 10082.7385,
+                "inputTokens": 334,
+                "outputTokens": 258,
+                "result": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Assuming that the dataframe is already defined as df\n\n# Grouping the dataframe by year and summing the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Creating a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n\nA bar chart is also created using the bar_chart() function from Streamlit to visualize the yearly military expenditure. This helps the user to see the trend in military expenditure over the years and identify any spikes or dips in spending.\n\nOverall, this code helps the user to determine the year with the highest likelihood of going to war by analyzing the military expenditure data.",
+                "chatCompletionResult": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Assuming that the dataframe is already defined as df\n\n# Grouping the dataframe by year and summing the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Finding the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Displaying the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Creating a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code first groups the dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure using the idxmax() function. The result is displayed on Streamlit using the write() function.\n\nA bar chart is also created using the bar_chart() function from Streamlit to visualize the yearly military expenditure. This helps the user to see the trend in military expenditure over the years and identify any spikes or dips in spending.\n\nOverall, this code helps the user to determine the year with the highest likelihood of going to war by analyzing the military expenditure data."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "I want to determine the highest likelihood of going to war"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "df.groupby('year')['Military expenditure (current USD)'].sum()"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nONLY USE STREAMLIT FOR GRAPHS AND CHARTS\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \n+++++\nTASK:\nI want to determine the highest likelihood of going to war\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\nCURRENT DATAFRAME CODE:\ndf.groupby('year')['Military expenditure (current USD)'].sum()\n+++++\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 7970.7465,
+                "inputTokens": 329,
+                "outputTokens": 200,
+                "result": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Group the dataframe by year and sum the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Find the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Display the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Create a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code groups the given dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure and displays it on Streamlit. Finally, it creates a bar chart to visualize the yearly military expenditure. This helps the user to determine the highest likelihood of going to war by looking at the military expenditure of different countries over the years.",
+                "chatCompletionResult": "[STARTCODE]\nimport pandas as pd\nimport streamlit as st\n\n# Group the dataframe by year and sum the military expenditure\nyearly_military_expenditure = df.groupby('year')['Military expenditure (current USD)'].sum()\n\n# Find the year with the highest military expenditure\nmax_year = yearly_military_expenditure.idxmax()\n\n# Display the result on Streamlit\nst.write(\"The year with the highest military expenditure is:\", max_year)\n\n# Create a bar chart to visualize the yearly military expenditure\nst.bar_chart(yearly_military_expenditure)\n\n[ENDCODE]\n\n[EXPLANATION]\nThe code groups the given dataframe by year and sums the military expenditure for each year. It then finds the year with the highest military expenditure and displays it on Streamlit. Finally, it creates a bar chart to visualize the yearly military expenditure. This helps the user to determine the highest likelihood of going to war by looking at the military expenditure of different countries over the years."
+            }
+        }
+    ]
+}

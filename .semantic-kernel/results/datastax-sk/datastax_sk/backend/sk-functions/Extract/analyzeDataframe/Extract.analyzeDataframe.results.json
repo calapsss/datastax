@@ -1,0 +1,75 @@
+{
+    "version": "1.0",
+    "skillName": "Extract",
+    "functionName": "analyzeDataframe",
+    "description": "The semantic function analyzes the contents of the dataframe and returns short information about it for context.",
+    "filePath": "datastax-sk/datastax_sk/backend/sk-functions/Extract/analyzeDataframe/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 500,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income Afghanistan,AFG,AF,1974,3581366.35143003,,1.61082474226804,South Asia,Low income Afghanistan,AFG,AF,1975,4203664.56865451,,1.72206572769953,South Asia,Low income Afghanistan,AFG,AF,1976,5393251.2159455,,2.04608695652174,South Asia,Low income Afghanistan,AFG,AF,1977,6127288.0633346,,2.0114747930775,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "ANALYZE THE GIVEN DATAFRAME AND PROVIDE NECESSARY INFORMATION THAT CAN BE USED FOR ANALYSIS.\nDONT FORGET TO LIST THE NECESSARY COLUMNS.\n[INPUT]\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income Afghanistan,AFG,AF,1974,3581366.35143003,,1.61082474226804,South Asia,Low income Afghanistan,AFG,AF,1975,4203664.56865451,,1.72206572769953,South Asia,Low income Afghanistan,AFG,AF,1976,5393251.2159455,,2.04608695652174,South Asia,Low income Afghanistan,AFG,AF,1977,6127288.0633346,,2.0114747930775,South Asia,Low income\n[END INPUT]\n",
+                "durationInMilliseconds": 6574.8538,
+                "inputTokens": 297,
+                "outputTokens": 194,
+                "result": "The given dataframe contains information on military expenditure for different countries over the years. The necessary columns for analysis are:\n- country: name of the country\n- iso3c: ISO 3166-1 alpha-3 code of the country\n- iso2c: ISO 3166-1 alpha-2 code of the country\n- year: year of the military expenditure data\n- Military expenditure (current USD): the amount of military expenditure in current US dollars\n- Military expenditure (% of general government expenditure): the percentage of military expenditure in the general government expenditure\n- Military expenditure (% of GDP): the percentage of military expenditure in the Gross Domestic Product (GDP)\n- adminregion: administrative region of the country\n- incomeLevel: income level of the country\n\nThis information can be used to analyze the trends and patterns of military expenditure for different countries over time, and to compare the military expenditure of different countries based on their income level and administrative region.",
+                "chatCompletionResult": "The given dataframe contains information on military expenditure for different countries over the years. The necessary columns for analysis are:\n- country: name of the country\n- iso3c: ISO 3166-1 alpha-3 code of the country\n- iso2c: ISO 3166-1 alpha-2 code of the country\n- year: year of the military expenditure data\n- Military expenditure (current USD): the amount of military expenditure in current US dollars\n- Military expenditure (% of general government expenditure): the percentage of military expenditure in the general government expenditure\n- Military expenditure (% of GDP): the percentage of military expenditure in the Gross Domestic Product (GDP)\n- adminregion: administrative region of the country\n- incomeLevel: income level of the country\n\nThis information can be used to analyze the trends and patterns of military expenditure for different countries over time, and to compare the military expenditure of different countries based on their income level and administrative region."
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo-0301",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo-0301",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 500,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income Afghanistan,AFG,AF,1974,3581366.35143003,,1.61082474226804,South Asia,Low income Afghanistan,AFG,AF,1975,4203664.56865451,,1.72206572769953,South Asia,Low income Afghanistan,AFG,AF,1976,5393251.2159455,,2.04608695652174,South Asia,Low income Afghanistan,AFG,AF,1977,6127288.0633346,,2.0114747930775,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "YOU ARE GIVEN A DATAFRAME. \nANALYZE THE DATAFRAME.\n\nLIST THE NECESSARY COLUMNS.\n[INPUT]\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income Afghanistan,AFG,AF,1973,3341271.55123016,,1.86891025641026,South Asia,Low income Afghanistan,AFG,AF,1974,3581366.35143003,,1.61082474226804,South Asia,Low income Afghanistan,AFG,AF,1975,4203664.56865451,,1.72206572769953,South Asia,Low income Afghanistan,AFG,AF,1976,5393251.2159455,,2.04608695652174,South Asia,Low income Afghanistan,AFG,AF,1977,6127288.0633346,,2.0114747930775,South Asia,Low income\n[END INPUT]\n",
+                "durationInMilliseconds": 2309.7692,
+                "inputTokens": 285,
+                "outputTokens": 55,
+                "result": "The necessary columns in the given dataframe are:\n- country\n- iso3c\n- iso2c\n- year\n- Military expenditure (current USD)\n- Military expenditure (% of general government expenditure)\n- Military expenditure (% of GDP)\n- adminregion\n- incomeLevel",
+                "chatCompletionResult": "The necessary columns in the given dataframe are:\n- country\n- iso3c\n- iso2c\n- year\n- Military expenditure (current USD)\n- Military expenditure (% of general government expenditure)\n- Military expenditure (% of GDP)\n- adminregion\n- incomeLevel"
+            }
+        }
+    ]
+}
