@@ -1,13 +1,17 @@
-from typing import Union
-from fastapi import FastAPI
+from typing import Union, Optional
+from fastapi import FastAPI, UploadFile, File
 import semantic_kernel as sk
 import pandas as pd
 import json
+import re
 from semantic_kernel.connectors.ai.open_ai import (
     OpenAITextEmbedding,
     OpenAIChatCompletion,
 )
 from semantic_kernel.orchestration.context_variables import ContextVariables
+
+
+
 
 
 # Initialize Semantic Kernel
@@ -34,7 +38,10 @@ analyzeDataframe = extract_plugin['analyzeDataframe']
 transform_plugin = kernel.import_semantic_skill_from_directory(plugins_directory, "Transform")
 dfReframer = transform_plugin['dfReframer']
 simpleCodeGen = transform_plugin['simpleCodeGen']
-
+#Interpret
+# Dealing with prompt interpretation
+interpret_plugin = kernel.import_semantic_skill_from_directory(plugins_directory, "Interpret")
+decipherPrompt = interpret_plugin['decipherPrompt']
 
 app = FastAPI()
 
@@ -42,6 +49,30 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Welcome to DataStax API" : "Please use /docs to see the API documentation"}
+
+
+# FILE UPLOAD
+# Definition: API that handles the file upload
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    #Store file in temp folder
+    with open(f"temp/{file.filename}", "wb") as buffer:
+        buffer.write(file.file.read())
+    #Return success message
+    return {"Uploaded": file.filename}
+
+
+
+# INTERPRET API
+# Definition: API that handles the interpretation of the prompt and the dataframe
+@app.get("/interpretPrompt/")
+def interpret_prompt(prompt: str, dataframe: str):
+    response = decipherPrompt(variables=ContextVariables(content=prompt, variables={'dataframe':dataframe})).result
+    response = re.search(r'\[STARTMODPROMPT\]\n\"(.*)\"\n\[ENDMODPROMPT\]', response).group(1)
+    print("Response: ", response)
+    return response
+
+
 
 # EXTRACT API
 # Definition: The initial API that takes the dataframe and process it to generate the questions
@@ -90,6 +121,7 @@ def init_question_query_pair():
     return data
 
 
+
 # TRANSFORM API
 # Definition: API that handles code generation and transforming the dataframes
 @app.get("/simpleCodeGeneration/")
@@ -98,4 +130,5 @@ def simple_code_generation(dataframe: str, prompt: str, code: str):
     response = simpleCodeGen(variables=ContextVariables(content=prompt, variables={'dataframe':dataframe, 'code':code})).result
     #Return the json object
     return json.loads(response)
+
 

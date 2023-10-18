@@ -1,4 +1,9 @@
-Given the {{$input}}, generate a list of possible questions that can be asked about the data and a corresponding pandas query assuming that the dataframe is defined as 'df'. Each question should be relevant and insightful, providing a clear understanding of the information present in the dataframe.
+Given the Information about the dataframe, generate a list of possible questions that can be asked about the data and a corresponding pandas query code 
+Dataframe Information:
+{{$input}}
+Context:
+- Assume that the dataframe is defined as 'df'. 
+- Each question should be relevant and insightful, providing a clear understanding of the information present in the dataframe.
 - THE QUESTIONS SHOULD NOT BE SPECIFIC BUT SHOULD BE GENERAL ENOUGH TO BE APPLICABLE TO ANY DATAFRAME
 - OUTPUT IN JSON DICTIONARY {question:query}
 [STARTJSON]
